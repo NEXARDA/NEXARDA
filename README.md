@@ -10,5 +10,3 @@ With our API endpoints you can do a number of things:
 - Embed games, studios, consoles and gear on your website.
 
 Please stay tuned whilst we work on this documentation and API endpoints for public use, we will announce our API's in the coming months if things go to plan. Stay safe and make sure to star this project on GitHub!
-
---
