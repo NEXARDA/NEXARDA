@@ -9,4 +9,4 @@ With our API endpoints you can do a number of things:
 - Search for video games, franchises, studios, consoles and gear (on all platforms).
 - Embed games, studios, consoles and gear on your website.
 
-Please stay tuned whilst we work on this documentation and API endpoints for public use, we will announce our API's in the coming months if things go to plan. Stay safe and make sure to star this project on GitHub!
+<a href="https://github.com/NEXARDA/NEXARDA/wiki"><img src="https://dabuttonfactory.com/button.png?t=Get+Started&f=Roboto-Bold&ts=26&tc=fff&hp=32&vp=20&c=4&bgt=unicolored&bgc=32a0ac" width="160"></a>
