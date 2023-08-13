@@ -1,12 +1,5 @@
 <a href="https://www.nexarda.com/"><img src="https://imgcdn1.nexarda.com/main/static/branding/logo.svg" width="420"></a>
 ## NEXARDA™ - Game more, for less!
-Welcome to the Official API Documentation for NEXARDA™, here you explore different endpoints and examples to show you how to use them. Our API endpoints are currently 100% free rate-limit free, but we will block any IP's that we think are harmful or abusive to our servers. You do not need a NEXARDA™ account or any type of authorization to use the API endpoints. You can also use our HTML Embeds via JavaScript (coming soon) and make requests to our API's via CORS.
-
-As a price comparison website for video games, we work directly with retailers to fetch prices in different currencies to show our customers the best (cheapest) possible prices in their region. We make money through affiliate programs with these retailers when users make purchases. Unfortunately, we don't currently offer any type of partnership/loyalty programs or sub-affiliate programs for users to earn money with us.
-
-With our API endpoints you can do a number of things:
-- Display and log video game prices/discounts on your website.
-- Search for video games, franchises, studios, consoles and gear (on all platforms).
-- Embed games, studios, consoles and gear on your website.
+Welcome to the API Documentation for NEXARDA™ - the video game price comparison website built for gamers. Here you can view available API endpoints for our website to implement our service in your project/website. All API endpoints are currently 100% free to use and don't require authentication. We monitor all incoming requests and block any abusive/harmful IPs. We work closely with our approved online retailers and fetch product prices of video games, game consoles and gaming gear in different currencies, then present the best deals to users in multiple regions. They can then decide which offer they want and purchase the game through the store's website - where we may earn a commission as an affiliate at no extra cost to the buyer.
 
 <a href="https://github.com/NEXARDA/NEXARDA/wiki"><img src="https://dabuttonfactory.com/button.png?t=Get+Started&f=Roboto-Bold&ts=26&tc=fff&hp=32&vp=20&c=4&bgt=unicolored&bgc=32a0ac" width="160"></a>
