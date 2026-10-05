@@ -60,8 +60,6 @@
                 inlinePriceElement.innerHTML = "Prices range from " + data.prices.currency_symbol + data.prices.lowest.toFixed(2).toLocaleString() + " to " + data.prices.currency_symbol + data.prices.highest.toFixed(2).toLocaleString() + " (" + data.prices.currency + ") - view " + data.prices.offers + " offers from " + data.prices.stores + " " + ((data.prices.stores == 1) ? "store" : "stores") + ". <a href='https://www.nexarda.com" + data.info.slug + "#purchase' target='_blank'>" + label + "</a>";
             }).catch(error => console.error("Error fetching data:", error));
         });
-    
-        
     </script>
 </body>
 </html>
