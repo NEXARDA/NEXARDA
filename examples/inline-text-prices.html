@@ -1,1 +1,67 @@
-...
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inline Text Prices - NEXARDA™ API Examples</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 32px;
+            background-color: #f5f5f5;
+        }
+    
+        h1 {
+            text-align: center;
+            margin: 0px 0 16px 0;
+        }
+
+        hr {
+            background: #ccc;
+            height: 1px;
+            margin: 32px 0;
+            border: 0;
+        }
+
+        #infoSubtitle {
+            text-align: center;
+            margin: 0 0 32px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Inline Text Prices - NEXARDA™ API Examples</h1>
+    <p id="infoSubtitle">Showing prices within text for multiple games.</p>
+
+    <hr>
+
+    <h2>Nivalis Nights - Inline Pricing Text (Paid)</h2>
+    <p data-nexarda-inline-price="5260" data-nexarda-currency="USD">Loading price data...</p>
+
+    <hr>
+
+    <h2>Rocket League - Inline Pricing Text (Free)</h2>
+    <p data-nexarda-inline-price="27" data-nexarda-currency="EUR">Loading price data...</p>
+
+    <script>
+        const inlinePriceElements = document.querySelectorAll('[data-nexarda-inline-price]');
+
+        inlinePriceElements.forEach(inlinePriceElement => {
+            fetch("https://www.nexarda.com/api/v3/prices?type=game&id=" + inlinePriceElement.getAttribute("data-nexarda-inline-price") +"&currency=" + inlinePriceElement.getAttribute("data-nexarda-currency")).then(response => response.json()).then(dataResponse => {
+                data = dataResponse;
+
+                let label = "Buy Now";
+                if(data.prices.lowest == 0 && data.prices.highest == 0) {
+                    label = "Get For Free";
+                }
+
+                inlinePriceElement.innerHTML = "Prices range from " + data.prices.currency_symbol + data.prices.lowest.toFixed(2).toLocaleString() + " to " + data.prices.currency_symbol + data.prices.highest.toFixed(2).toLocaleString() + " (" + data.prices.currency + ") - view " + data.prices.offers + " offers from " + data.prices.stores + " " + ((data.prices.stores == 1) ? "store" : "stores") + ". <a href='https://www.nexarda.com" + data.info.slug + "#purchase' target='_blank'>" + label + "</a>";
+            }).catch(error => console.error("Error fetching data:", error));
+        });
+    
+        
+    </script>
+</body>
+</html>

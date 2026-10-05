@@ -1,1 +1,244 @@
-...
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Offers Table - NEXARDA™ API Examples</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 32px;
+            background-color: #f5f5f5;
+        }
+    
+        h1 {
+            text-align: center;
+            margin: 0px 0 16px 0;
+        }
+    
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+    
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+    
+        th {
+            background-color: #f7f7f7;
+            font-weight: bold;
+        }
+    
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+    
+        a.button {
+            display: inline-block;
+            padding: 5px 10px;
+            background-color: #007bff;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+    
+        a.button:hover {
+            background-color: #0056b3;
+        }
+
+        hr {
+            background: #ccc;
+            height: 1px;
+            margin: 32px 0;
+            border: 0;
+        }
+
+        #gameSubtitle {
+            text-align: center;
+            margin: 0 0 32px 0;
+        }
+
+        select, option {
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Offers Table - NEXARDA™ API Examples</h1>
+    <p id="gameSubtitle">Loading, please wait...</p>
+
+    <select id="editionFilter">
+        <option value="All Editions">All Editions</option>
+        <!-- Edition options will be added dynamically by the script -->
+    </select>
+
+    <select id="platformFilter">
+        <option value="All Platforms">All Platforms</option>
+        <!-- Platform options will be added dynamically by the script -->
+    </select>
+    
+    <select id="regionFilter">
+        <option value="All Regions">All Regions</option>
+        <!-- Region options will be added dynamically by the script -->
+    </select>
+
+    <hr>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Edition</th>
+                <th>Platform</th>
+                <th>Region</th>
+                <th>Price ▼</th>
+                <th>Discount</th>
+                <th>Store</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody id="priceTableBody">
+            <!-- Data will be inserted here -->
+            <tr>
+                <td colspan="7">Loading...</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <script>
+        const dataUrl = "https://www.nexarda.com/api/v3/prices?type=game&id=4800&currency=GBP";
+        let filteredEdition = "All Editions";
+        let filteredPlatform = "All Platforms";
+        let filteredRegion = "All Regions";
+        let data = null;
+    
+        function updateTable() {
+            const priceTableBody = document.getElementById("priceTableBody");
+            priceTableBody.innerHTML = "";
+    
+            const filteredData = data.prices.list.filter(item => {
+                if(
+                    (filteredEdition === "All Editions" || item.edition === filteredEdition) &&
+                    (filteredPlatform === "All Platforms" || item.platform === filteredPlatform) && 
+                    (filteredRegion === "All Regions" || item.region === filteredRegion)
+                ) {
+                    return true;
+                }
+
+                return false;
+            });
+
+            filteredData.sort((a, b) => a.price - b.price);
+    
+            filteredData.forEach(item => {
+                const row = document.createElement("tr");
+    
+                const editionCell = document.createElement("td");
+                editionCell.textContent = item.edition;
+                row.appendChild(editionCell);
+
+                const platformCell = document.createElement("td");
+                platformCell.textContent = item.platform;
+                row.appendChild(platformCell);
+
+                const regionCell = document.createElement("td");
+                regionCell.textContent = item.region;
+                row.appendChild(regionCell);
+    
+                const priceCell = document.createElement("td");
+                if(item.available) {
+                    priceCell.textContent = "£" + item.price.toFixed(2);
+                } else {
+                    //priceCell.textContent = "—";
+                    row.style.display = "none";
+                }
+                row.appendChild(priceCell);
+    
+                const discountCell = document.createElement("td");
+                discountCell.textContent = item.discount + "%";
+                row.appendChild(discountCell);
+    
+                const storeCell = document.createElement("td");
+                storeCell.textContent = item.store.name;
+                row.appendChild(storeCell);
+    
+                const linkCell = document.createElement("td");
+                const linkButton = document.createElement("a");
+                linkButton.textContent = "Buy Now";
+                linkButton.href = item.url;
+                linkButton.target = "_blank";
+                linkCell.appendChild(linkButton);
+                row.appendChild(linkCell);
+    
+                priceTableBody.appendChild(row);
+            });
+        }
+    
+        function onEditionChange(select) {
+            filteredEdition = select.value;
+            updateTable();
+        }
+
+        function onPlatformChange(select) {
+            filteredPlatform = select.value;
+            updateTable();
+        }
+    
+        function onRegionChange(select) {
+            filteredRegion = select.value;
+            updateTable();
+        }
+    
+        fetch(dataUrl).then(response => response.json()).then(dataResponse => {
+            data = dataResponse;
+            const editionFilter = document.getElementById("editionFilter");
+            const regionFilter = document.getElementById("regionFilter");
+            const editions = data.prices.editions;
+            const regions = data.prices.regions;
+
+            editions.forEach(edition => {
+                const option = document.createElement("option");
+                option.value = edition;
+                option.textContent = edition;
+                editionFilter.appendChild(option);
+            });
+
+            const platforms = [];
+            data.prices.list.map(item => item.platform).forEach(platform => {
+                if (!platforms.includes(platform)) {
+                    platforms.push(platform);
+                }
+            });
+
+            platforms.forEach(platform => {
+                const option = document.createElement("option");
+                option.value = platform;
+                option.textContent = platform;
+                platformFilter.appendChild(option);
+            });
+
+            regions.forEach(region => {
+                const option = document.createElement("option");
+                option.value = region;
+                option.textContent = region;
+                regionFilter.appendChild(option);
+            });
+
+            editionFilter.addEventListener("change", event => onEditionChange(event.target));
+            platformFilter.addEventListener("change", event => onPlatformChange(event.target));
+            regionFilter.addEventListener("change", event => onRegionChange(event.target));
+
+            document.getElementById("gameSubtitle").textContent = "Showing prices for " + data.info.name + " in " + data.prices.currency + ".";
+
+            updateTable();
+        }).catch(error => console.error("Error fetching data:", error));
+    </script>
+</body>
+</html>

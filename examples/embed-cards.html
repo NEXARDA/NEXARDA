@@ -1,1 +1,120 @@
-...
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Embed Cards - NEXARDA™ API Examples</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 32px;
+            background-color: #f5f5f5;
+        }
+    
+        h1 {
+            text-align: center;
+            margin: 0px 0 16px 0;
+        }
+
+        hr {
+            background: #ccc;
+            height: 1px;
+            margin: 32px 0;
+            border: 0;
+        }
+
+        #infoSubtitle {
+            text-align: center;
+            margin: 0 0 32px 0;
+        }
+
+        html [data-nexarda-embed="buy_game_card:1734"] {
+            background: #ccc !important;
+            border-color: #a7a7a7 !important;
+            border-radius: 0 !important;
+            color: #333 !important;
+            font-size: 16px !important;
+        }
+
+        html [data-nexarda-embed="buy_game_card:1734"] .nxda-embed-cover img {
+            border-radius: 0;
+            width: 128px;
+            border: 0;
+        }
+
+        html [data-nexarda-embed="buy_game_card:1734"] .nxda-embed-prices {
+            color: inherit !important;
+        }
+
+        html [data-nexarda-embed="buy_game_card:1734"] .nxda-embed-prices svg {
+            fill: currentColor;
+        }
+
+        html [data-nexarda-embed="buy_game_card:1734"] .nxda-embed-button {
+            border-radius: 0;
+            border: 0;
+        }
+
+        html [data-nexarda-embed="buy_game_card:1734"] .nxda-embed-title {
+            font-size: 22px;
+            color: inherit !important;
+        }
+    </style>
+</head>
+<body>
+    <h1>Embed Cards - NEXARDA™ API Examples</h1>
+    <p id="infoSubtitle">Showing embed cards and buttons for several games.</p>
+
+    <hr>
+
+    <h2>Sea of Thieves - Embed Button</h2>
+
+    <!-- NEXARDA Embed: Start -->
+    <div data-nexarda-embed="buy_game_button:42"></div>
+    <script src="https://www.nexarda.com/api/v3/embed?type=buy_game_button&id=42&output=js" async></script>
+    <!-- NEXARDA Embed: End -->
+
+    <hr>
+
+    <h2>Command & Conquer: Red Alert 3 - Embed Button (Alternative Design & Size)</h2>
+
+    <!-- NEXARDA Embed: Start -->
+    <div data-nexarda-embed="buy_game_button:111"></div>
+    <script src="https://www.nexarda.com/api/v3/embed?type=buy_game_button&id=111&output=js" async onLoad="useAltButton(111);"></script>
+    <!-- NEXARDA Embed: End -->
+
+    <hr>
+
+    <h2>DOOM Eternal - Embed Card</h2>
+
+    <!-- NEXARDA Embed: Start -->
+    <div data-nexarda-embed="buy_game_card:71"></div>
+    <script src="https://www.nexarda.com/api/v3/embed?type=buy_game_card&id=71&output=js" async></script>
+    <!-- NEXARDA Embed: End -->
+
+    <hr>
+
+    <h2>Marvel's Guardians of the Galaxy - Embed Card (Alternative Design & Size)</h2>
+
+    <!-- NEXARDA Embed: Start -->
+    <div data-nexarda-embed="buy_game_card:1734"></div>
+    <script src="https://www.nexarda.com/api/v3/embed?type=buy_game_card&id=1734&output=js" async></script>
+    <!-- NEXARDA Embed: End -->
+
+    <script>
+        function useAltButton(gameId) {
+            const embed = document.querySelector(`div[data-nexarda-embed="buy_game_button:${gameId}"]`);
+            if(!embed) { return; }
+
+            const image = embed.querySelector('img');
+            if(!image) { return; }
+
+            image.width = 200;
+            image.height = "auto";
+            image.src = "https://imgcdn1.nexarda.com/main/static/embeds/compare-button-dark.png";
+        }
+    </script>
+</body>
+</html>
