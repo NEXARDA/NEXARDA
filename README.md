@@ -36,3 +36,7 @@ Attribution is optional, but would be appreciated. A small disclaimer like one o
 * <a href="https://www.nexarda.com/">Data provided by NEXARDA™.</a>
 * <a href="https://www.nexarda.com/">Prices and product information supplied by NEXARDA™.</a>
 * <a href="https://www.nexarda.com/">Powered by NEXARDA™.</a>
+
+## Do you have any examples?
+
+Yes, <a href="https://github.com/NEXARDA/NEXARDA/tree/main/examples">we've made a few examples here</a> that you can view and re-purpose - they are basic standalone HTML files using the v3 API.
